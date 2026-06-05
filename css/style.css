@@ -117,7 +117,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background-size: cover;
   background-repeat: no-repeat;
   border: 1px solid var(--line);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
   overflow: hidden;
   transition: box-shadow 0.35s ease, transform 0.35s ease;
 }
@@ -165,7 +165,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* 활성 창을 앞으로 */
 .stage.show-about .window--about { z-index: 3; }
-.stage.show-about .window--about { box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
+.stage.show-about .window--about { box-shadow: 0 4px 14px rgba(0,0,0,0.14); }
 
 /* =========================================================
    창 상단 메뉴바
@@ -449,7 +449,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     min-height: 0 !important;
     margin: 0;
     border-radius: 10px;
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
   }
   /* 메인(목록)을 맨 위로, About은 아래로, 열린 Archive는 최상단 */
   .window--drift   { order: 1; }
