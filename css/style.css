@@ -393,12 +393,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .archive-label {
   position: absolute;
   left: 0;
-  width: 110px;
-  top: 26px;
-  text-align: right;
+  width: 145px;
+  top: 30px;
+  text-align: left;
+  white-space: nowrap;     /* 두 줄로 안 깨지게 */
   font-family: var(--font-kr);
   font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
   color: var(--ink-soft);
 }
 .archive-title {
