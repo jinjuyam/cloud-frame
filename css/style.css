@@ -266,7 +266,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* =========================================================
    Drift 구름 리스트
    ========================================================= */
-.cloud-list { list-style: none; padding-bottom: 300px; }
+.cloud-list { list-style: none; padding-bottom: 110px; }
 .cloud-item {
   position: relative;
   display: flex;
