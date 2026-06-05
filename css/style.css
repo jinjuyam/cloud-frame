@@ -445,30 +445,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 @media (max-width: 1080px) {
   body { overflow-x: hidden; }
 
-  /* 겹쳐있던 창들을 세로로 쌓되, 데스크톱처럼 '층층이 쌓인 종이 카드' 느낌 유지 */
+  /* 데스크톱처럼 종이들이 '겹쳐 쌓이는' 캐스케이드 (세로 일렬 X) */
   .stage {
     min-height: 0;
-    padding: 16px 16px 90px;
+    padding: 18px 14px 90px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
   }
   .window {
     position: relative;
-    width: 100% !important;
+    width: auto !important;
     top: auto; left: auto; right: auto;
     min-height: 0 !important;
     margin: 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+    border-radius: 12px 12px 10px 10px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.32);
   }
-  /* 메인(목록)을 맨 위로, About은 아래로, 열린 Archive는 최상단 */
-  .window--drift   { order: 1; }
-  .window--about   { order: 3; }
-  .window--archive { order: 0; }
+  /* 뒤: About → 앞: Drift(목록)가 위로 살짝 겹쳐 올라옴 / 상세는 최상단 */
+  .window--about   { order: 1; z-index: 1; }
+  .window--drift   { order: 2; z-index: 2; margin-top: -54px; }
+  .window--archive { order: 0; z-index: 5; }
 
-  .about-body { padding: 44px 40px 56px; min-height: 0; }
-  .about-cloud--1 { bottom: 24px; }
+  /* About 하단에 여백 → 겹침 영역이 글씨를 가리지 않게 */
+  .about-body { padding: 44px 36px 92px; min-height: 0; }
+  .about-cloud--1 { bottom: 64px; }
 
   /* 호버로만 뜨는 도트 구름은 모바일에서 숨김(터치엔 호버 없음) */
   .hover-cloud { display: none; }
@@ -491,8 +491,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .winbar-meta { padding-right: 18px; font-size: 13px; }
   .binding { display: none; }
 
-  .about-body { padding: 36px 24px 48px; }
-  .about-watermark { left: 30%; top: 26%; }
+  .about-body { padding: 36px 24px 84px; }
+  .about-watermark { left: 30%; top: 24%; }
 
   .cloud-item { padding: 20px 20px; gap: 14px; }
   .cloud-num { font-size: 28px; width: 36px; }
