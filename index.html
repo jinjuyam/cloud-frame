@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cloud Frame — 여섯 가지 구름의 형태와 결을 기록한 아카이브" />
+  <title>Cloud Frame</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- 거대한 배경 워드마크 -->
+  <div class="bg-wordmark" aria-hidden="true">Cloud frame</div>
+
+  <!-- 상단 내비게이션 -->
+  <header class="topnav">
+    <a href="#" class="brand">Cloud frame</a>
+    <nav class="topnav-links">
+      <button class="topnav-link" data-target="drift">Drift</button>
+      <button class="topnav-link" data-target="about">About</button>
+    </nav>
+  </header>
+
+  <!-- 겹쳐진 두 개의 창 -->
+  <main class="stage">
+
+    <!-- ABOUT 창 (뒤쪽) -->
+    <section class="window window--about" id="about" data-window="about">
+      <div class="winbar">
+        <div class="dots">
+          <span class="dot dot--dark"></span>
+          <span class="dot dot--light"></span>
+        </div>
+        <div class="winbar-tab">About</div>
+        <div class="winbar-spacer"></div>
+        <div class="winbar-meta">@2026 Content</div>
+      </div>
+
+      <div class="about-body">
+        <p class="about-kicker">About</p>
+        <h1 class="about-title">About</h1>
+        <p class="about-desc">
+          하늘 위 구름은 늘 그 자리에 있지만, 우리는 이름을 알지 못한 채 지나친다.<br />
+          Cloud Frame은 여섯 가지 구름의 형태와 결을 기록한 아카이브다.<br />
+          잠깐 멈춰 하늘을 올려다보듯, 천천히 들여다보길 바란다.
+        </p>
+        <span class="about-watermark">Cloud</span>
+        <img class="about-cloud about-cloud--1" src="img/cloud-2.png" alt="" aria-hidden="true" />
+        <img class="about-cloud about-cloud--2" src="img/cloud-2.png" alt="" aria-hidden="true" />
+      </div>
+
+      <div class="binding" aria-hidden="true"></div>
+    </section>
+
+    <!-- DRIFT 창 (앞쪽) -->
+    <section class="window window--drift" id="drift" data-window="drift">
+      <div class="winbar">
+        <div class="dots">
+          <span class="dot dot--dark"></span>
+          <span class="dot dot--gray"></span>
+        </div>
+        <div class="winbar-tab winbar-tab--dark">Drift</div>
+        <div class="winbar-spacer"></div>
+        <div class="winbar-meta winbar-meta--dark">@2026 Content</div>
+      </div>
+
+      <ul class="cloud-list" id="cloudList">
+        <!-- JS로 렌더링 -->
+      </ul>
+    </section>
+
+    <!-- ARCHIVE 상세 창 (1번 클릭 시 등장) -->
+    <section class="window window--archive" id="archive" data-window="archive">
+      <div class="winbar">
+        <div class="dots">
+          <span class="dot dot--dark"></span>
+          <span class="dot dot--gray"></span>
+        </div>
+        <div class="winbar-tab winbar-tab--dark">Archive</div>
+        <div class="winbar-spacer"></div>
+        <button class="archive-close" id="archiveClose" aria-label="닫기">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <figure class="note">
+        <img class="note-cloud" id="noteCloud" src="img/note-cloud.png" alt="구름 사진" />
+        <figcaption class="note-cap">
+          <span id="noteDate">26.03.02</span>
+          <span id="noteName">뭉게구름</span>
+        </figcaption>
+      </figure>
+
+      <div class="archive-body">
+        <div class="archive-figure">
+          <canvas class="archive-img" id="haloCanvas" aria-label="구름 하프톤 이미지"></canvas>
+        </div>
+
+        <div class="archive-content">
+          <span class="archive-label" id="archiveLabel">뭉게구름 타입</span>
+          <h2 class="archive-title" id="archiveTitle">Cumulus Type</h2>
+
+          <div class="archive-desc" id="archiveDesc">
+            <p>뭉게구름은 맑고 따뜻한 날 하늘 위로 솟아오르는 크고 하얀 구름이다.<br />지면이 태양열로 달궈지면 따뜻한 공기가 위로 올라가면서 수증기가 응결되어 만들어진다.<br />아래쪽은 평평하고 위쪽은 꽃양배추처럼 뭉실뭉실 부풀어 오른 형태가 특징이다.</p>
+            <p>주로 오후에 발달하며 날씨가 좋을 때 자주 볼 수 있지만, 크게 성장하면 천둥번개를<br />동반한 적란운으로 발전하기도 한다.</p>
+          </div>
+
+          <div class="archive-tags" id="archiveTags">
+            <span class="tag">Puffy</span>
+            <span class="tag">Cotton Candy</span>
+            <span class="tag">Pure White</span>
+            <span class="tag">Objet</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/halo-data.js"></script>
+  <script src="js/halo-photos.js"></script>
+  <script src="js/clouds-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

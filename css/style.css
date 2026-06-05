@@ -1,0 +1,488 @@
+/* =========================================================
+   Cloud Frame — 디자인 토큰
+   ========================================================= */
+:root {
+  --bg-top: #161616;
+  --bg-bottom: #212121;
+  --ink: #161616;        /* state/black/default */
+  --ink-soft: #616161;   /* state/black/hover  */
+  --paper: #ededed;      /* 종이(밝은 패널) */
+  --paper-light: #f5f5f5;
+  --line: #d4d4d4;       /* 패널 내부 구분선 */
+  --binding: #2a2a2a;    /* 스파이럴 바인딩 점 */
+  --white: #ffffff;
+  --off-white: #fafafa;
+
+  --font-display: "Pixelify Sans", monospace;   /* 로고/워드마크 (Fuuld 대체) */
+  --font-sans: "Geist", system-ui, sans-serif;  /* 영문 제목 */
+  --font-kr: "Pretendard", system-ui, sans-serif;
+  --font-num: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--white);
+  background-color: #141414;
+  background-image: url("../img/bg-texture.png");   /* 어두운 그레인 텍스처 */
+  background-repeat: repeat;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 중앙 은은한 글로우 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(60% 50% at 50% 35%, rgba(120, 120, 130, 0.16), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+/* =========================================================
+   배경 거대 워드마크
+   ========================================================= */
+.bg-wordmark {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(70px, 20vw, 300px);
+  line-height: 1;
+  color: var(--white);
+  opacity: 0.05;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+/* =========================================================
+   상단 내비게이션
+   ========================================================= */
+.topnav {
+  position: relative;
+  z-index: 10;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 8vw, 120px);
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 32px);
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+.topnav-links { display: flex; gap: 40px; }
+.topnav-link {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(16px, 1.4vw, 20px);
+  color: var(--white);
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.topnav-link:hover { opacity: 1; transform: translateY(-1px); }
+
+/* =========================================================
+   무대(겹쳐진 창)
+   ========================================================= */
+.stage {
+  position: relative;
+  z-index: 5;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 20px 20px 160px;
+  /* 데스크톱에서 겹침을 위한 최소 높이 */
+  min-height: 1480px;
+}
+
+/* 창 공통 — 종이 패널 (실제 종이 텍스처 이미지 사용) */
+.window {
+  position: absolute;
+  background-color: var(--paper);
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+/* About: 뒤쪽, 살짝 위·오른쪽 */
+/* About: 뒤쪽 — 어두운 그레이 */
+.window--about {
+  top: 0;
+  right: 20px;
+  width: 74%;
+  min-height: 1180px;
+  z-index: 1;
+  background-color: #3c3c3e;
+  background-image: url("../img/tex-about.png");   /* 다크 그레이 종이 텍스처 */
+  border-color: rgba(255, 255, 255, 0.12);
+}
+/* 어두운 창 내부 — 밝은 텍스트 / 옅은 구분선 */
+.window--about .winbar { border-bottom-color: rgba(255, 255, 255, 0.14); }
+.window--about .winbar-tab {
+  color: #fafafa;
+  border-left-color: rgba(255, 255, 255, 0.14);
+  border-right-color: rgba(255, 255, 255, 0.14);
+}
+.window--about .winbar-meta { color: #f4f4f4; }
+.window--about .about-title { color: #ffffff; }
+.window--about .about-desc { color: #fafafa; }
+.window--about .about-watermark { color: #6f6f72; opacity: 0.9; }
+/* 바인딩 점은 어두운 창에서만, 진한 색으로 */
+.window--about .binding {
+  background-image: radial-gradient(circle at center, #161616 6px, transparent 7px);
+}
+/* Drift: 앞쪽, 아래·왼쪽 */
+.window--drift {
+  top: 90px;
+  left: 20px;
+  width: 75%;
+  z-index: 2;
+  background-color: var(--paper-light);
+  background-image: url("../img/tex-drift.png");   /* 흰색 종이 텍스처 */
+}
+
+/* 뒤에 있는(비활성) 종이는 클릭 가능 힌트 */
+.stage:not(.show-about) .window--about { cursor: pointer; }
+.stage.show-about .window--drift { cursor: pointer; }
+
+/* 활성 창을 앞으로 */
+.stage.show-about .window--about { z-index: 3; }
+.stage.show-about .window--about { box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
+
+/* =========================================================
+   창 상단 메뉴바
+   ========================================================= */
+.winbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 66px;
+  border-bottom: 1px solid var(--line);
+}
+.dots { display: flex; gap: 12px; padding: 0 28px; }
+.dot { width: 20px; height: 20px; border-radius: 50%; }
+.dot--dark  { background: #161616; }
+.dot--gray  { background: #c4c4c4; }
+.dot--light { background: #ffffff; border: 1px solid #d0d0d0; }
+
+.winbar-tab {
+  height: 66px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.2px;
+}
+.winbar-tab { color: var(--ink); }
+.winbar-spacer { flex: 1; }
+.winbar-meta {
+  padding-right: 40px;
+  font-size: 16px;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+.winbar-meta--dark { color: var(--ink-soft); }
+
+/* 스파이럴 바인딩 (오른쪽 점들) */
+.binding {
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  right: 18px;
+  width: 20px;
+  background-image: radial-gradient(circle at center, var(--binding) 6px, transparent 7px);
+  background-size: 20px 32px;
+  background-repeat: repeat-y;
+  z-index: 4;
+}
+
+/* =========================================================
+   About 본문
+   ========================================================= */
+.about-body {
+  position: relative;
+  padding: 66px 112px 80px;
+  min-height: 900px;
+}
+.about-kicker { display: none; }
+.about-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(40px, 6vw, 60px);
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+.about-desc {
+  font-family: var(--font-kr);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 460px;
+  width: 100%;
+  word-break: keep-all;
+}
+.about-watermark {
+  position: absolute;
+  left: 48%;
+  top: 32%;
+  font-family: var(--font-display);
+  font-size: clamp(60px, 12vw, 120px);
+  color: #8d8d8d;
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+}
+/* 하프톤(망점) 구름 — 검은 배경 위 흰 망점, screen 블렌드로 검정 제거 */
+.about-cloud {
+  position: absolute;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.about-cloud--1 { width: 46%; left: 17%; bottom: 7%;  opacity: 1; }
+.about-cloud--2 { width: 17%; right: 3%; bottom: 39%; opacity: 0.9; }
+
+/* =========================================================
+   Drift 구름 리스트
+   ========================================================= */
+.cloud-list { list-style: none; padding-bottom: 300px; }
+.cloud-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 36px 40px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.2s;
+  cursor: default;
+}
+.cloud-item:hover { background: rgba(0, 0, 0, 0.035); }
+
+/* 호버 시 등장하는 하프톤 구름 캔버스 (6개 공통) */
+.cloud-item { overflow: visible; }
+.hover-cloud {
+  position: absolute;
+  top: 50%;
+  right: 4%;
+  transform: translateY(-50%);
+  pointer-events: none;   /* 클릭은 항목으로 통과 */
+  z-index: 5;
+  display: block;
+}
+.cloud-num {
+  font-family: var(--font-num);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--ink);
+  width: 223px;   /* 번호(40px) → 제목(263px) 간격, 디자인 그대로 */
+  flex-shrink: 0;
+}
+.cloud-text { display: flex; flex-direction: column; gap: 10px; }
+.cloud-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(28px, 3.5vw, 40px);
+  letter-spacing: -0.4px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.cloud-sub {
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+/* =========================================================
+   ARCHIVE 상세 창
+   ========================================================= */
+.window--archive {
+  top: 50px;
+  left: 13%;
+  width: 74%;
+  z-index: 5;
+  display: none;
+  background-color: var(--paper);
+  background-image: url("../img/tex-drift.png");
+}
+.stage.show-archive .window--archive { display: block; }
+
+.archive-close {
+  margin-right: 28px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ink);
+  transition: background 0.2s;
+}
+.archive-close:hover { background: rgba(0, 0, 0, 0.07); }
+
+.archive-body { padding: 0 40px 60px; }
+
+/* 큰 하프톤 이미지 */
+.archive-figure { position: relative; margin-top: 40px; }
+.archive-img {
+  width: 100%;
+  aspect-ratio: 1377 / 875;   /* 원본 사진 비율 */
+  display: block;
+  background: #0d0d0d;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+  cursor: crosshair;
+}
+
+/* 찢어진 메모 — 창 상단에 걸쳐 클립이 위로 살짝 잘리게 (종이 영역만 트림한 이미지 사용) */
+.note {
+  position: absolute;
+  top: -14px;
+  right: 96px;
+  width: 285px;
+  aspect-ratio: 501 / 367;
+  background: url("../img/note-paper-trim.png") center / contain no-repeat;
+  filter: drop-shadow(0 4px 9px rgba(0, 0, 0, 0.14));
+  z-index: 6;
+}
+.note-cloud {
+  position: absolute;
+  left: 9%;
+  top: 17%;
+  width: 46%;
+  aspect-ratio: 147 / 135;  /* 디자인 사진 비율(가로가 약간 김) */
+  height: auto;
+  object-fit: cover;        /* 비율 맞추되 왜곡 없이 채움 */
+}
+.note-cap {
+  position: absolute;
+  right: 8%;
+  top: 44%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: right;
+  font-family: var(--font-kr);
+  font-size: 17px;
+  line-height: 1.3;
+  color: #262626;
+}
+.note-cap span:last-child { font-size: 19px; font-weight: 500; }
+
+/* 제목 영역 — 왼쪽 거터에 한글 라벨 */
+.archive-content { position: relative; padding-left: 153px; margin-top: 40px; }
+.archive-label {
+  position: absolute;
+  left: 0;
+  width: 110px;
+  top: 26px;
+  text-align: right;
+  font-family: var(--font-kr);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+.archive-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(34px, 4vw, 48px);
+  letter-spacing: -0.48px;
+  color: var(--ink);
+}
+.archive-desc { margin-top: 22px; display: flex; flex-direction: column; gap: 18px; }
+.archive-desc p {
+  font-family: var(--font-kr);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.archive-tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.tag {
+  padding: 4px 12px;
+  border: 1px solid #e8e8e8;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 32px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/* =========================================================
+   반응형 — 태블릿
+   ========================================================= */
+@media (max-width: 1080px) {
+  .stage { min-height: 0; padding-bottom: 100px; }
+  .window {
+    position: relative;
+    width: 100% !important;
+    top: auto; left: auto; right: auto;
+    min-height: 0 !important;
+    margin: 0 auto;
+  }
+  .window--drift { margin-top: 28px; }
+  .about-body { padding: 48px 56px 64px; min-height: 0; }
+  .about-cloud--1 { bottom: 24px; }
+}
+
+/* =========================================================
+   반응형 — 모바일
+   ========================================================= */
+@media (max-width: 600px) {
+  .topnav { height: 72px; padding: 0 18px; }
+  .brand { font-size: 20px; }
+  .topnav-links { gap: 18px; }
+  .topnav-link { font-size: 15px; }
+
+  /* 모서리가 드러나는 보조 구름은 모바일에서 숨김 */
+  .about-cloud--2 { display: none; }
+
+  .winbar-tab { padding: 0 16px; font-size: 17px; }
+  .dots { padding: 0 16px; gap: 10px; }
+  .winbar-meta { padding-right: 18px; font-size: 13px; }
+  .binding { display: none; }
+
+  .about-body { padding: 36px 24px 48px; }
+  .about-watermark { left: 30%; top: 26%; }
+
+  .cloud-item { padding: 20px 20px; gap: 14px; }
+  .cloud-num { font-size: 28px; width: 36px; }
+  .cloud-text { padding-left: 0; }
+  .cloud-title { font-size: 24px; }
+  .cloud-sub { font-size: 15px; }
+
+  /* Archive 상세 — 모바일 */
+  .archive-body { padding: 0 20px 40px; }
+  .archive-figure { margin-top: 28px; }
+  .note { width: 150px; top: -34px; right: 0; }
+  .note-cap { font-size: 11px; }
+  .archive-content { padding-left: 0; margin-top: 56px; }
+  .archive-label {
+    position: static;
+    width: auto;
+    text-align: left;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .archive-desc p { font-size: 15px; }
+  .archive-desc p br { display: none; }
+}
