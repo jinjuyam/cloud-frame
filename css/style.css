@@ -326,7 +326,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background-color: #cfcfcf;
   background-image: url("../img/tex-archive.png");   /* 어두운 회색 종이(디자인 배경) */
 }
-.stage.show-archive .window--archive { display: block; }
+.stage.show-archive .window--archive {
+  display: block;
+  animation: archiveSlideUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* 상세 종이가 밑에서 위로 슝 올라옴 */
+@keyframes archiveSlideUp {
+  from { transform: translateY(90px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage.show-archive .window--archive { animation: none; }
+}
 
 .archive-close {
   margin-right: 28px;
