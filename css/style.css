@@ -55,12 +55,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  font-family: var(--font-display);
-  font-size: clamp(70px, 20vw, 300px);
-  line-height: 1;
-  color: var(--white);
-  opacity: 0.05;
-  white-space: nowrap;
+  width: min(1500px, 96vw);
+  height: auto;
+  opacity: 0.06;            /* 거대한 배경 워드마크(흰색 SVG) */
   pointer-events: none;
   z-index: 0;
   user-select: none;
@@ -79,11 +76,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: 0 clamp(20px, 8vw, 120px);
 }
 .brand {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 3vw, 32px);
-  color: var(--white);
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: 1px;
+}
+.brand img {
+  height: clamp(20px, 2.4vw, 30px);
+  width: auto;
+  display: block;
 }
 .topnav-links { display: flex; gap: 40px; }
 .topnav-link {
@@ -144,7 +144,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .window--about .winbar-meta { color: #f4f4f4; }
 .window--about .about-title { color: #ffffff; }
 .window--about .about-desc { color: #fafafa; }
-.window--about .about-watermark { color: #6f6f72; opacity: 0.9; }
+.window--about .about-watermark { filter: brightness(0.62); opacity: 0.5; }
 /* 바인딩 점은 어두운 창에서만, 진한 색으로 */
 .window--about .binding {
   background-image: radial-gradient(circle at center, #161616 6px, transparent 7px);
@@ -247,10 +247,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: absolute;
   left: 48%;
   top: 32%;
-  font-family: var(--font-display);
-  font-size: clamp(60px, 12vw, 120px);
-  color: #8d8d8d;
-  opacity: 0.55;
+  width: clamp(170px, 30vw, 360px);
+  height: auto;
+  filter: brightness(0.6);   /* 흰색 SVG → 회색 워터마크 */
+  opacity: 0.5;
   pointer-events: none;
   user-select: none;
 }
