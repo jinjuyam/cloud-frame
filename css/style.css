@@ -432,17 +432,35 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    반응형 — 태블릿
    ========================================================= */
 @media (max-width: 1080px) {
-  .stage { min-height: 0; padding-bottom: 100px; }
+  body { overflow-x: hidden; }
+
+  /* 겹쳐있던 창들을 세로로 쌓되, 데스크톱처럼 '층층이 쌓인 종이 카드' 느낌 유지 */
+  .stage {
+    min-height: 0;
+    padding: 16px 16px 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
   .window {
     position: relative;
     width: 100% !important;
     top: auto; left: auto; right: auto;
     min-height: 0 !important;
-    margin: 0 auto;
+    margin: 0;
+    border-radius: 10px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
   }
-  .window--drift { margin-top: 28px; }
-  .about-body { padding: 48px 56px 64px; min-height: 0; }
+  /* 메인(목록)을 맨 위로, About은 아래로, 열린 Archive는 최상단 */
+  .window--drift   { order: 1; }
+  .window--about   { order: 3; }
+  .window--archive { order: 0; }
+
+  .about-body { padding: 44px 40px 56px; min-height: 0; }
   .about-cloud--1 { bottom: 24px; }
+
+  /* 호버로만 뜨는 도트 구름은 모바일에서 숨김(터치엔 호버 없음) */
+  .hover-cloud { display: none; }
 }
 
 /* =========================================================
@@ -472,18 +490,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .cloud-sub { font-size: 15px; }
 
   /* Archive 상세 — 모바일 */
-  .archive-body { padding: 0 20px 40px; }
-  .archive-figure { margin-top: 28px; }
-  .note { width: 150px; top: -34px; right: 0; }
-  .note-cap { font-size: 11px; }
-  .archive-content { padding-left: 0; margin-top: 56px; }
+  .archive-body { padding: 0 18px 36px; }
+  .archive-figure { margin-top: 20px; }
+  /* 노트(찢긴 종이)는 이미지 우상단에 작게 얹힘 — 데스크톱 느낌 */
+  .note { width: 116px; top: 54px; right: 10px; z-index: 8; }
+  .note-cloud { left: 8%; top: 16%; width: 44%; }
+  .note-cap { font-size: 10px; top: 46%; }
+  .note-cap span:last-child { font-size: 11px; }
+  .archive-content { padding-left: 0; margin-top: 40px; }
   .archive-label {
     position: static;
     width: auto;
     text-align: left;
     display: block;
     margin-bottom: 8px;
+    font-size: 14px;
   }
-  .archive-desc p { font-size: 15px; }
+  .archive-title { font-size: 30px; }
+  .archive-desc p { font-size: 14px; line-height: 1.7; }
   .archive-desc p br { display: none; }
+  .archive-tags { gap: 8px; }
+  .tag { font-size: 13px; }
 }

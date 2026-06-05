@@ -31,7 +31,6 @@ const links = document.querySelectorAll(".topnav-link");
 
 // 첫 진입 시 해시로 상태 지정
 if (location.hash === "#about") stage.classList.add("show-about");
-if (location.hash === "#archive") stage.classList.add("show-archive");
 
 links.forEach((link) => {
   link.addEventListener("click", () => {
@@ -142,6 +141,13 @@ function openArchive(key) {
   stage.classList.remove("show-about");
   stage.classList.add("show-archive");
   requestAnimationFrame(() => window.__renderArchive && window.__renderArchive(key, d.halftone));
+
+  // 모바일: 상세가 위에 열리므로 그 위치로 스크롤
+  if (window.innerWidth <= 1080) {
+    requestAnimationFrame(() =>
+      document.getElementById("archive").scrollIntoView({ behavior: "smooth", block: "start" })
+    );
+  }
 }
 
 // 목록 항목 클릭 → 상세 데이터가 있으면 Archive 열기
@@ -453,4 +459,14 @@ document.addEventListener("keydown", (e) => {
     });
     li.addEventListener("pointerleave", () => { it.target = 0; ensureLoop(); });
   });
+})();
+
+// =========================================================
+//  딥링크 — #cumulus, #cirrus … 로 접속하면 해당 상세 바로 열기
+//  (#archive = 뭉게구름)
+// =========================================================
+(function () {
+  const k = location.hash.slice(1);
+  const key = k === "archive" ? "cumulus" : k;
+  if (details[key]) requestAnimationFrame(() => openArchive(key));
 })();
