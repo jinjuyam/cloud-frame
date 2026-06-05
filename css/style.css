@@ -319,12 +319,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ========================================================= */
 .window--archive {
   top: 50px;
-  left: 13%;
-  width: 74%;
+  left: 11%;
+  width: 80%;
   z-index: 5;
   display: none;
-  background-color: var(--paper);
-  background-image: url("../img/tex-drift.png");
+  background-color: #ebebeb;
+  background-image: url("../img/tex-archive.png");   /* 연한 회색 종이(디자인 배경) */
 }
 .stage.show-archive .window--archive { display: block; }
 
