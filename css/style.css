@@ -461,13 +461,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     border-radius: 12px 12px 10px 10px;
     box-shadow: 0 12px 26px rgba(0, 0, 0, 0.32);
   }
-  /* 앞: Drift(목록)가 위 / About은 그 뒤에서 아래로 살짝 겹쳐 깔림 / 상세는 최상단 */
-  .window--drift   { order: 1; z-index: 2; }
-  .window--about   { order: 2; z-index: 1; margin-top: -28px; }
+  /* 레퍼런스처럼: About은 제목바(winbar)만 위에 살짝 보이고(접힘),
+     목록(Drift)이 앞으로 크게 보임. "About" 누르면 펼쳐짐. */
+  .window--about {
+    order: 1; z-index: 1;
+    max-height: 66px;          /* winbar 높이만큼만 보이게 접음 */
+    overflow: hidden;
+    transition: max-height 0.45s ease;
+  }
+  .window--drift   { order: 2; z-index: 2; margin-top: -12px; }
   .window--archive { order: 0; z-index: 5; }
 
+  /* "About" 탭하면 펼쳐지며 앞으로 */
+  .stage.show-about .window--about {
+    max-height: 1600px;
+    overflow: visible;
+    z-index: 4;
+  }
+
   /* About: 구름 일러 제거 + 넉넉한 여백으로 글씨 안 겹치게 */
-  .about-body { padding: 50px 34px 56px; min-height: 0; }
+  .about-body { padding: 48px 34px 56px; min-height: 0; }
   .about-cloud { display: none; }
 
   /* 호버로만 뜨는 도트 구름은 모바일에서 숨김(터치엔 호버 없음) */
