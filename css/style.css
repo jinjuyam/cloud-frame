@@ -461,14 +461,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     border-radius: 12px 12px 10px 10px;
     box-shadow: 0 12px 26px rgba(0, 0, 0, 0.32);
   }
-  /* 뒤: About → 앞: Drift(목록)가 위로 살짝 겹쳐 올라옴 / 상세는 최상단 */
-  .window--about   { order: 1; z-index: 1; }
-  .window--drift   { order: 2; z-index: 2; margin-top: -54px; }
+  /* 앞: Drift(목록)가 위 / About은 그 뒤에서 아래로 살짝 겹쳐 깔림 / 상세는 최상단 */
+  .window--drift   { order: 1; z-index: 2; }
+  .window--about   { order: 2; z-index: 1; margin-top: -28px; }
   .window--archive { order: 0; z-index: 5; }
 
-  /* About 하단에 여백 → 겹침 영역이 글씨를 가리지 않게 */
-  .about-body { padding: 44px 36px 92px; min-height: 0; }
-  .about-cloud--1 { bottom: 64px; }
+  /* About: 구름 일러 제거 + 넉넉한 여백으로 글씨 안 겹치게 */
+  .about-body { padding: 50px 34px 56px; min-height: 0; }
+  .about-cloud { display: none; }
 
   /* 호버로만 뜨는 도트 구름은 모바일에서 숨김(터치엔 호버 없음) */
   .hover-cloud { display: none; }
@@ -491,8 +491,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .winbar-meta { padding-right: 18px; font-size: 13px; }
   .binding { display: none; }
 
-  .about-body { padding: 36px 24px 84px; }
-  .about-watermark { left: 30%; top: 24%; }
+  .about-body { padding: 44px 24px 52px; }
+  /* 워터마크는 글씨 위에 겹치지 않게 하단 구석으로 작고 옅게 */
+  .about-watermark { left: auto; right: 20px; top: auto; bottom: 20px; width: 140px; opacity: 0.22; }
 
   .cloud-item { padding: 20px 20px; gap: 14px; }
   .cloud-num { font-size: 28px; width: 36px; }
